@@ -20,6 +20,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Register {
 
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -32,12 +34,13 @@ public class Register {
 
 
     public String toCsv() {
+
         StringJoiner stringJoiner = new StringJoiner(";", "", "\n");
         stringJoiner.add(person.getIdentification());
         stringJoiner.add(person.getName());
         stringJoiner.add(person.getLastname());
-        stringJoiner.add(startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        stringJoiner.add(Objects.nonNull(finalDateTime) ? finalDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : "-");
+        stringJoiner.add(startDateTime.format(FORMATTER));
+        stringJoiner.add(Objects.nonNull(finalDateTime) ? finalDateTime.format(FORMATTER) : "-");
 
         /*if(Objects.nonNull(finalDateTime)) {
             stringJoiner.add(finalDateTime.toString());
