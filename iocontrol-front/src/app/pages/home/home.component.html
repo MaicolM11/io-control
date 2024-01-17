@@ -1,10 +1,18 @@
 
-<div style="text-align:center">
-    <img src ="./assets/img/Colegio-San-viator.png"><br/>
-    <p>Digite el numero de la ficha</p>
-    <p-inputNumber inputId="integeronly" [(ngModel)]="cardNumber"> </p-inputNumber><br/>
-    <p-button label="Siguiente"></p-button>
+<div>
+    <p-button class="flex justify-content-end" label="Reporte"></p-button>
+    <div class="flex justify-content-center">
+        <img src ="./assets/img/Colegio-San-viator.png"><br/>
+    </div>
+    <div class="flex justify-content-center mt-8">
+
+        <span class="p-float-label">
+            <p-inputNumber class="mr-2" inputId="integeronly" [(ngModel)]="cardNumber"> </p-inputNumber>
+            <label style="font-size: 17px;" for="number-input">Digite el numero de la ficha</label>
+        </span>
+        <p-button label="Registrar salida"></p-button>
+    </div>
 </div>
-<p-button label="Reporte"></p-button>
+
 
 

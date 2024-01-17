@@ -1,32 +1,62 @@
-<p>formpage works!</p>
-<div style="text-align:right">
-    <img src="./assets/img/logo.png"><br />
-</div>
-<p-card header="Registro de visitantes" [style]="{ width: '360px' }">
-    <form action="formulario" method="post">
-        <div style="text-align:center">
-            <img src="./assets/img/no foto.png" alt="no foto" width="150" height="150"><br />
+<div class="grid" style="height: 100%;">
+
+    <div class="col-6 flex align-items-center justify-content-center">
+        <p-card header="Registro de visitantes" [style]="{ width: '450px' }" >
+            <form action="formulario" method="post">
+                <div class="flex flex-column align-items-center">
+    
+                    <div>
+                        <img src="./assets/img/default-profile.png" alt="no foto" width="150" height="150"><br />
+                    </div>
+                    
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="identification"/>
+                        <label for="identification">Numero de documento</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="name"/>
+                        <label for="name">Nombres</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="lastname"/>
+                        <label for="lastname">Apellidos</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="cardNumber"/>
+                        <label for="cardNumber">Número de ficha</label>
+                    </span>
+                    
+                    <div class="mt-5">
+                       {{ nowDate }}
+                    </div>
+    
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="startDate"/>
+                        <label for="startDate">Fecha de ingreso</label>
+                    </span>
+    
+                    <span class="mt-5 p-float-label">
+                        <input pInputText id="endDate"/>
+                        <label for="endDate">Fecha de salida</label>
+                    </span>
+                    <div class="mt-5">
+                        <p-button class="mr-2" label="Registrar" icon="pi pi-check"></p-button>
+                        <p-button label="Cancelar" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+                    </div>
+                    <div class="mt-5">
+                        <p-button class="mr-2" label="Volver" icon="pi pi-check"></p-button>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+    
+    <div style="background-color: #180c34" class="col-6 flex align-items-center justify-content-center">
+        <div style="text-align:right">
+            <img src="./assets/img/logo.png"><br />
         </div>
-        <ul>
-            <li>
-                <label for="id">Numero de Documento:</label>
-                <input type="int" id="documentNumber" name="user_documentNumber" />
-            </li>
-            <li>
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="user_name" />
-            </li>
-            <li>
-                <label for="lastname">Apellido:</label>
-                <input type="text" id="lastname" name="user_lastname" />
-            </li>
-            <li>
-                <label for="cardNumber">Numero de Ficha:</label>
-                <input type="int" id="cardNumber" name="user_cardNumber" />
-            </li>
-        </ul>
-        <p-button label="Registrar" icon="pi pi-check"></p-button>
-    <p-button label="Cancelar" icon="pi pi-times" styleClass="p-button-secondary"
-        [style]="{ 'margin-left': '.5em' }"></p-button>
-    </form>
-</p-card>
+    </div>
+
+</div>
+
+
