@@ -9,7 +9,7 @@ import { BarcodeService } from '../../services/barcode.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  cardNumber: number;
+  numberCard: number;
   private userData: string = '';
 
   constructor(
@@ -23,7 +23,7 @@ export class HomeComponent {
     if (event.key === 'Enter') {
       this.barcodeService.interpreter(this.userData)
         .subscribe(person => { 
-          this.router.navigateByUrl("/formulario");
+          this.router.navigate(['/formulario'], { state: { data: person, type: 'input' } });
         });
       this.userData = '';
     } else {

@@ -7,6 +7,7 @@ import { PrimengLibModule } from './module/primeng-lib.module';
 import { HomeComponent } from './pages/home/home.component';
 import { FormpageComponent } from './pages/formpage/formpage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule, 
     PrimengLibModule,
     FormsModule,
     ReactiveFormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withFetch()) 
   ],
   bootstrap: [AppComponent]
 })

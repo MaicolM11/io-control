@@ -1,8 +1,6 @@
 package com.sanviator.iocontrol.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,9 @@ public class Person {
     private String identification;
     private String name;
     private String lastname;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String photo;
 
 

@@ -2,53 +2,54 @@
 
     <div class="col-6 flex align-items-center justify-content-center">
         <p-card header="Registro de visitantes" [style]="{ width: '450px' }">
-            <form action="formulario" method="post">
+            <form [formGroup]="form" action="formulario" method="post">
                 <div class="flex flex-column align-items-center">
 
-                    <div>
+                    <div *ngIf="!person.photo">
+                        gffd
                         <img src="./assets/img/default-profile.png" alt="no foto" width="150" height="150"><br />
                     </div>
 
-                    <span class="mt-5 p-float-label">
-                        <input pInputText id="identification" />
-                        <label for="identification">Numero de documento</label>
-                    </span>
-                    <span class="mt-5 p-float-label">
-                        <input pInputText id="name" />
-                        <label for="name">Nombres</label>
-                    </span>
-                    <span class="mt-5 p-float-label">
-                        <input pInputText id="lastname" />
-                        <label for="lastname">Apellidos</label>
-                    </span>
-                    <span class="mt-5 p-float-label">
-                        <input pInputText id="cardNumber" />
-                        <label for="cardNumber">Número de ficha</label>
-                    </span>
-
-                    <div class="mt-5">
-                        {{ nowDate }}
+                    <div *ngIf="person.photo">
+                        <img [src]="'data:image/jpeg;base64,' + person.photo" alt="no foto" width="150" height="150"><br />
                     </div>
 
                     <span class="mt-5 p-float-label">
+                        <input formControlName="identification" pInputText id="identification" />
+                        <label for="identification">Numero de documento</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input formControlName="name" pInputText id="name" />
+                        <label for="name">Nombres</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input formControlName="lastname" pInputText id="lastname" />
+                        <label for="lastname">Apellidos</label>
+                    </span>
+                    <span class="mt-5 p-float-label">
+                        <input formControlName="numberCard" pInputText id="numberCard" />
+                        <label for="numberCard">Número de ficha</label>
+                    </span>
+
+                    <div class="mt-5" *ngIf="type == 'input'">
+                        {{ nowDate }}
+                    </div>
+
+                    <span class="mt-5 p-float-label" *ngIf="type == 'output'">
                         <input pInputText id="startDate" />
                         <label for="startDate">Fecha de ingreso</label>
                     </span>
 
-                    <span class="mt-5 p-float-label">
+                    <span class="mt-5 p-float-label" *ngIf="type == 'output'">
                         <input pInputText id="endDate" />
                         <label for="endDate">Fecha de salida</label>
                     </span>
-                    <div class="mt-5">
-                        <p-button class="mr-2" label="Registrar" icon="pi pi-check"></p-button>
-                        <a href="http://localhost:4200/home">
-                            <p-button label="Cancelar" icon="pi pi-times" styleClass="p-button-secondary"> </p-button>
-                        </a>
+                    <div class="mt-5" *ngIf="type == 'input'">
+                        <p-button [disabled]="form.invalid" class="mr-2" label="Registrar" icon="pi pi-check" (click)="register()"></p-button>
+                        <p-button label="Cancelar" icon="pi pi-times" styleClass="p-button-secondary" (click)="home()"> </p-button>
                     </div>
-                    <div class="mt-5">
-                        <a href="http://localhost:4200/home">   
-                        <p-button class="mr-2" label="Volver" icon="pi pi-check"></p-button>
-                        </a>
+                    <div class="mt-5" *ngIf="type == 'output'">
+                        <p-button class="mr-2" label="Volver" icon="pi pi-check" (click)="home()"></p-button>
                     </div>
                 </div>
             </form>

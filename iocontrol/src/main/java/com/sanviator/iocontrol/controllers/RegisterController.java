@@ -16,6 +16,7 @@ import java.time.LocalTime;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "Content-Type")
 public class RegisterController {
 
     private final InterpreterTextService interpreterTextService;
@@ -37,8 +38,8 @@ public class RegisterController {
     // guardar hora entrada
     @PostMapping("/register")
     public void registerStartDate(@RequestBody Person person, @RequestParam("numberCard") Integer cardNumber) {
-        var actualPerson = personRepository.findById(person.getIdentification());
-        var personDB = actualPerson.orElseGet(() -> personRepository.save(person));
+        var personDB = personRepository.findById(person.getIdentification())
+                .orElseGet(() -> personRepository.save(person));
 
         var registerDb = Register.builder()
                 .startDateTime(LocalDateTime.now())
@@ -50,15 +51,16 @@ public class RegisterController {
 
     // guardar hora de salida
     @PostMapping("/registerFinalDate")
-    public Register registerFinalDate(@RequestParam("numberCard") Integer cardNumber) {
+    public ResponseEntity<Register> registerFinalDate(@RequestParam("numberCard") Integer cardNumber) {
         var registerDb = registerRepository.findTopByCardNumberOrderByStartDateTimeDesc(cardNumber);
         if(registerDb.isPresent()) {
             var newRegister = registerDb.get();
             newRegister.setFinalDateTime(LocalDateTime.now());
             registerRepository.save(newRegister);
-            return newRegister;
+            return  ResponseEntity.ok()
+                    .body(newRegister);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     // reportes 2018-05-05
@@ -72,9 +74,8 @@ public class RegisterController {
         StringBuilder csv = new StringBuilder(CSV_HEADERS);
 
         registers.forEach(register -> csv.append(register.toCsv()));
-
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=datos.csv");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + startDate + " " + endDate + ".csv");
 
         return ResponseEntity.ok()
                 .headers(headers)

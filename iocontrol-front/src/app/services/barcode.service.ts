@@ -16,4 +16,8 @@ export class BarcodeService {
     return this.http.post<IPerson>(`${this.API}/interpreted`, trama);
   }
 
+  register(person: IPerson, numberCard: string): Observable<void> {
+    return this.http.post<void>(`${this.API}/register?numberCard=${numberCard}`, person);
+  }
+
 }
