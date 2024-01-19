@@ -52,7 +52,7 @@ public class RegisterController {
     // guardar hora de salida
     @PostMapping("/registerFinalDate")
     public ResponseEntity<Register> registerFinalDate(@RequestParam("numberCard") Integer cardNumber) {
-        var registerDb = registerRepository.findTopByCardNumberOrderByStartDateTimeDesc(cardNumber);
+        var registerDb = registerRepository.findTopByCardNumberAndFinalDateTimeIsNullOrderByStartDateTimeDesc(cardNumber);
         if(registerDb.isPresent()) {
             var newRegister = registerDb.get();
             newRegister.setFinalDateTime(LocalDateTime.now());

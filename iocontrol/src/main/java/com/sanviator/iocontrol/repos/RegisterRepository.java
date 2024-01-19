@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface RegisterRepository  extends CrudRepository<Register, UUID> {
 
-     Optional<Register> findTopByCardNumberOrderByStartDateTimeDesc(Integer cardNumber);
+     Optional<Register> findTopByCardNumberAndFinalDateTimeIsNullOrderByStartDateTimeDesc(Integer cardNumber);
      List<Register> findByStartDateTimeBetween(LocalDateTime to, LocalDateTime from);
 
 }

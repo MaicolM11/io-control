@@ -23,12 +23,21 @@ export class HomeComponent {
     if (event.key === 'Enter') {
       this.barcodeService.interpreter(this.userData)
         .subscribe(person => { 
-          this.router.navigate(['/formulario'], { state: { data: person, type: 'input' } });
+          this.router.navigate(['/formulario'], { state: { person, type: 'input' } });
         });
       this.userData = '';
     } else {
       this.userData += event.key;
     }
+  }
+
+  registerOutput() {
+    this.barcodeService.registerOutput(this.numberCard)
+      .subscribe({ 
+        next: (register) => {
+          this.router.navigate(['/formulario'], { state: {  person: register.person, register, type: 'output' } });
+        }
+      })
   }
 
 }

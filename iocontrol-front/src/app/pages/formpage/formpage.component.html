@@ -5,13 +5,13 @@
             <form [formGroup]="form" action="formulario" method="post">
                 <div class="flex flex-column align-items-center">
 
-                    <div *ngIf="!person.photo">
-                        gffd
-                        <img src="./assets/img/default-profile.png" alt="no foto" width="150" height="150"><br />
+                    <div class="flex flex-column align-items-center" *ngIf="!form.value.photo">
+                        <img  src="./assets/img/default-profile.png" alt="no foto" width="150" height="150"><br />
+                        <p-fileUpload mode="basic" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Seleccionar foto"></p-fileUpload>
                     </div>
 
-                    <div *ngIf="person.photo">
-                        <img [src]="'data:image/jpeg;base64,' + person.photo" alt="no foto" width="150" height="150"><br />
+                    <div *ngIf="form.value.photo">
+                        <img [src]="form.value.photo" alt="no foto" width="150" height="150"><br />
                     </div>
 
                     <span class="mt-5 p-float-label">
@@ -35,16 +35,16 @@
                     </div>
 
                     <span class="mt-5 p-float-label" *ngIf="type == 'output'">
-                        <input pInputText id="startDate" />
+                        <input formControlName="startDate" pInputText id="startDate" />
                         <label for="startDate">Fecha de ingreso</label>
                     </span>
 
                     <span class="mt-5 p-float-label" *ngIf="type == 'output'">
-                        <input pInputText id="endDate" />
+                        <input formControlName="finalDate" pInputText id="endDate" />
                         <label for="endDate">Fecha de salida</label>
                     </span>
                     <div class="mt-5" *ngIf="type == 'input'">
-                        <p-button [disabled]="form.invalid" class="mr-2" label="Registrar" icon="pi pi-check" (click)="register()"></p-button>
+                        <p-button [disabled]="form.invalid" class="mr-2" label="Registrar" icon="pi pi-check" (click)="registerInput()"></p-button>
                         <p-button label="Cancelar" icon="pi pi-times" styleClass="p-button-secondary" (click)="home()"> </p-button>
                     </div>
                     <div class="mt-5" *ngIf="type == 'output'">

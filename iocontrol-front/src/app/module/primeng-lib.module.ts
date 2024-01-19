@@ -4,9 +4,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { FileUploadModule } from 'primeng/fileupload';
 
-
-const PRIMENG_MODULES =[ButtonModule, InputNumberModule, CardModule, InputTextModule]
+const PRIMENG_MODULES =[ButtonModule, InputNumberModule, CardModule, InputTextModule, FileUploadModule]
 
 
 @NgModule({
