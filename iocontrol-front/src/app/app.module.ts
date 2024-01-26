@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { FormpageComponent } from './pages/formpage/formpage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule, 
     PrimengLibModule,

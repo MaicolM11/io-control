@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,11 +29,17 @@ public class RegisterController {
 
     // metodo interpretar trama txt scanner, busca bd si existe, set photo, retorna el person
     @PostMapping("/interpreted")
-    public Person interpretedScannerText(@RequestBody String txt) {
+    public ResponseEntity<Person> interpretedScannerText(@RequestBody String txt) {
         var personInterpreted = interpreterTextService.interpretedText(txt);
+        
+        if(Objects.isNull(personInterpreted.getIdentification())) {
+            return ResponseEntity.badRequest().build();
+        }
+
         var personDB = personRepository.findById(personInterpreted.getIdentification());
-        personDB.ifPresent(person -> personInterpreted.setPhoto(person.getPhoto()));
-        return personInterpreted;
+
+        return ResponseEntity.ok()
+                .body(personDB.orElse(personInterpreted));
     }
 
     // guardar hora entrada
@@ -69,7 +76,7 @@ public class RegisterController {
         var startDateTime = LocalDate.parse(startDate).atStartOfDay();
         var endDateTime = LocalDate.parse(endDate).atTime(LocalTime.MAX);
 
-        var registers = registerRepository.findByStartDateTimeBetween(startDateTime, endDateTime);
+        var registers = registerRepository.findByStartDateTimeBetweenOrderByStartDateTimeAsc(startDateTime, endDateTime);
 
         StringBuilder csv = new StringBuilder(CSV_HEADERS);
 

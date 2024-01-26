@@ -24,4 +24,10 @@ export class BarcodeService {
   registerOutput(numberCard: number) :Observable<IRegister> {
     return this.http.post<IRegister>(`${this.API}/registerFinalDate?numberCard=${numberCard}`, {});
   }
+
+  downloadReport(startDate: string, endDate: string) : void{
+    window.open(`${this.API}/download?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+
 }

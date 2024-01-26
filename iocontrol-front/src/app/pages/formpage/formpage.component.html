@@ -35,12 +35,12 @@
                     </div>
 
                     <span class="mt-5 p-float-label" *ngIf="type == 'output'">
-                        <input formControlName="startDate" pInputText id="startDate" />
+                        <input  pInputText id="startDate" [value]="form.value.startDate | date:'dd/MM/yyyy HH:mm:ss'" />
                         <label for="startDate">Fecha de ingreso</label>
                     </span>
 
                     <span class="mt-5 p-float-label" *ngIf="type == 'output'">
-                        <input formControlName="finalDate" pInputText id="endDate" />
+                        <input  pInputText id="endDate" [value]="form.value.finalDate | date:'dd/MM/yyyy HH:mm:ss'"  />
                         <label for="endDate">Fecha de salida</label>
                     </span>
                     <div class="mt-5" *ngIf="type == 'input'">

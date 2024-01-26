@@ -5,8 +5,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { FileUploadModule } from 'primeng/fileupload';
-
-const PRIMENG_MODULES =[ButtonModule, InputNumberModule, CardModule, InputTextModule, FileUploadModule]
+import { DialogModule } from 'primeng/dialog';
+import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+const PRIMENG_MODULES =[ButtonModule, InputNumberModule, CardModule, InputTextModule, FileUploadModule,
+  DialogModule, CalendarModule, ConfirmDialogModule]
 
 
 @NgModule({

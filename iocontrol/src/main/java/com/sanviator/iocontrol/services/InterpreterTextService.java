@@ -7,11 +7,16 @@ import org.springframework.stereotype.Service;
 public class InterpreterTextService {
 
     public Person interpretedText(String text) {
-        var person = new Person();
-        person.setName("Carlos Felipe");
-        person.setLastname("Cuesta Rios");
-        person.setIdentification("12399");
-        return person;
+        try {
+            String[] metadata = text.split("\\t");
+            var person = new Person();
+            person.setIdentification(metadata[0]);
+            person.setName(metadata[1] + " " + metadata[2]);
+            person.setLastname(metadata[3] + " " + metadata[4]);
+            return person;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return new Person();
+        }
     }
 
 }

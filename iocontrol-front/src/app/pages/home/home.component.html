@@ -1,12 +1,18 @@
 
 <div>
-    <p-button class="flex justify-content-end" icon="pi pi-check" [rounded]="true" [text]="true" [raised]="true"></p-button>
- 
+    <div class="mt-3 mr-3">
+        <p-button (click)="showDialog()" class="flex justify-content-end" icon="pi pi-download" [rounded]="true" [text]="true" [raised]="true"></p-button>
+    </div>
     <div class="flex justify-content-center">
         <img src ="./assets/img/Colegio-San-viator.png"><br/>
     </div>
-    <div class="flex justify-content-center mt-8">
-
+    <div class="mt-4 flex justify-content-center">
+        <span class="p-float-label">
+            <input [(ngModel)]="userData" style="min-width: 500px;" pInputText id="userData" (keydown.enter)="interpreted()"/>
+            <label for="userData">Datos...</label>
+        </span>
+    </div>
+    <div class="flex justify-content-center mt-5">
         <span class="p-float-label">
             <p-inputNumber class="mr-2" inputId="integeronly" [(ngModel)]="numberCard"> </p-inputNumber>
             <label style="font-size: 17px;" for="number-input">Digite el numero de la ficha</label>
@@ -17,3 +23,45 @@
 
 
 
+
+<p-dialog header="Reporte" [(visible)]="visible" [modal]="true" [style]="{width: '30vw'}" (onHide)="clearDialog()">
+    <p>
+     Seleccione el rango de fechas para el reporte.
+    </p>
+    <div class="flex justify-content-center">
+        <div class="mt-4  p-float-label">
+            <p-calendar id="startDate" [(ngModel)]="startDate" appendTo="body"></p-calendar>
+            <label style="font-size: 17px;" for="startDate">Fecha inicial</label>
+        </div>
+    </div>
+    <div class="flex justify-content-center">
+
+        <div class="mt-4 p-float-label">
+            <p-calendar id="endDate" [(ngModel)]="endDate" appendTo="body"></p-calendar>
+            <label style="font-size: 17px;" for="endDate">Fecha final</label>
+        </div>
+    </div>
+        <div class="flex justify-content-center">
+
+        <div class="mt-4">
+            <p-button label="Descargar reporte" (click)="downloadReport()"></p-button>
+        </div>
+    </div>
+    
+
+</p-dialog>
+
+<p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message>
+        <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+            <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                <i class="pi pi-times text-5xl"></i>
+            </div>
+            <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
+            <p class="mb-0">{{ message.message }}</p>
+            <div class="flex align-items-center gap-2 mt-4">
+                <button pButton label="Ok" (click)="cd.accept()" class="w-8rem"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmDialog>
