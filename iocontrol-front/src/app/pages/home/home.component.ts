@@ -28,7 +28,7 @@ export class HomeComponent {
     this.visible = true;
   }
 
-  interpreted() {
+interpreted() {
     this.barcodeService.interpreter(this.userData)
       .subscribe({
         next: person => {
@@ -41,25 +41,13 @@ export class HomeComponent {
     this.userData = '';
   }
 
+
   downloadReport() {
     const sd = this.dateFormatter(this.startDate);
     const ed = this.dateFormatter(this.endDate);
     this.barcodeService.downloadReport(sd, ed);
     this.visible = false;
   }
-
-  // @HostListener('window:keydown', ['$event'])
-  // handleKeyDown(event: KeyboardEvent): void {
-  //   if (event.key === 'Enter') {
-  //     this.barcodeService.interpreter(this.userData)
-  //       .subscribe(person => { 
-  //         this.router.navigate(['/formulario'], { state: { person, type: 'input' } });
-  //       });
-  //     this.userData = '';
-  //   } else {
-  //     this.userData += event.key;
-  //   }
-  // }
 
   registerOutput() {
     this.barcodeService.registerOutput(this.numberCard)

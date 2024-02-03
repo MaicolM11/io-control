@@ -8,7 +8,7 @@ public class InterpreterTextService {
 
     public Person interpretedText(String text) {
         try {
-            String[] metadata = text.split("\\t");
+            String[] metadata = text.split(" ");
             var person = new Person();
             person.setIdentification(metadata[0]);
             person.setName(metadata[1] + " " + metadata[2]);
